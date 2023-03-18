@@ -24,6 +24,9 @@ module.exports = {
             },
         ]
     },
+    resolve: {
+        extensions: ['.ts', '.js'],
+    },
     plugins: [
         new HtmlWebPackPlugin({
             template: "./src/view/index.html",
@@ -32,5 +35,9 @@ module.exports = {
             inject: true,
             publicPath: 'public'
         })
-    ]
+    ],
+    externals: {
+        bufferutil: "bufferutil",
+        "utf-8-validate": "utf-8-validate",
+    },
 }
