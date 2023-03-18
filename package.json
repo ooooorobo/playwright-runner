@@ -7,7 +7,7 @@
     "clean": "rm -rf dist",
     "compile": "npm run clean && tsc && copyfiles -f src/index.html dist",
     "start": "npm run compile && cross-env NODE_ENV=development electron .",
-    "test-e2e": "playwright test",
+    "test-e2e": "playwright test example.spec.ts",
     "test-e2e-open": "playwright test --headed",
     "test-e2e-debug": "playwright test --debug",
     "test-e2e-codegen": "playwright codegen"

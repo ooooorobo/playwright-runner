@@ -1,20 +1,19 @@
-const {app, BrowserWindow} = require('electron');
+const {app} = require('electron');
+const ipcMain = require('electron').ipcMain;
 
-const createWindow = () => {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600
-    })
-    win.loadFile('dist/index.html');
-    if (process.env.NODE_ENV === 'development') {
-        win.webContents.openDevTools()
-    }
-}
+const {createWindow} = require('./window');
+const {runE2eTest} = require('./scripts');
+
+let win;
 
 app.whenReady().then(() => {
-    createWindow()
+    win = createWindow()
 });
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
+})
+
+ipcMain.on('runE2eTest', (channel, listener) => {
+    runE2eTest(channel, listener);
 })
