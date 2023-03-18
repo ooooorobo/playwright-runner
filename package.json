@@ -6,18 +6,16 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "electron:start": "yarn packages/electron start",
-    "e2e:start": "yarn packages/e2e test-e2e"
+    "e2e:start": "yarn packages/e2e test-e2e",
+    "server:start": "yarn packages/server start"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
     "typescript": "^5.0.2"
   },
   "packageManager": "yarn@3.5.0",
-  "nodeLinker": "pnp",
   "workspaces": [
     "packages/e2e",
-    "packages/electron",
-    "packages/electron-webpack"
+    "packages/server"
   ]
 }
