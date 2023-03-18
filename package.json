@@ -6,16 +6,41 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "e2e:start": "yarn packages/e2e test-e2e",
-    "server:start": "yarn packages/server start"
+    "test-e2e-open": "playwright test --headed",
+    "test-e2e-debug": "playwright test --debug",
+    "test-e2e-codegen": "playwright codegen",
+    "e2e:start": "playwright test",
+    "clean": "rm -rf dist",
+    "build": "yarn clean && webpack",
+    "watch:build": "webpack --watch --config packages/server/webpack.config.js",
+    "watch:server": "nodemon ./packages/server/dist/main.js --watch './dist'",
+    "server:start": "npm-run-all --parallel watch:build watch:server"
+  },
+  "dependencies": {
+    "ansi-to-html": "^0.7.2",
+    "bufferutil": "^4.0.7",
+    "koa": "^2.14.1",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
+    "socket.io": "^4.6.1",
+    "utf-8-validate": "^6.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.3",
+    "@babel/preset-typescript": "^7.21.0",
+    "@playwright/test": "^1.31.2",
+    "@types/koa": "^2.13.5",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
     "@types/node": "^18.15.3",
-    "typescript": "^5.0.2"
+    "babel-loader": "^9.1.2",
+    "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^2.0.21",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1"
   },
-  "packageManager": "yarn@3.5.0",
-  "workspaces": [
-    "packages/e2e",
-    "packages/server"
-  ]
+  "packageManager": "yarn@3.5.0"
 }

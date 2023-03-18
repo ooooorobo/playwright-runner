@@ -5,8 +5,8 @@ module.exports = {
     mode: "development",
     target: "node",
     entry: {
-        main: "/src/index.ts",
-        "public/renderer": "/src/view/renderer.ts"
+        main: path.join(__dirname, 'src/index.ts'),
+        "public/renderer": path.join(__dirname, "/src/view/renderer.ts")
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -29,7 +29,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: "./src/view/index.html",
+            template: path.join(__dirname, 'src/view/index.html'),
             filename: "public/index.html",
             chunks: [],
             inject: true,
