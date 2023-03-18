@@ -1,15 +1,14 @@
 console.log('loaded renderer')
 
-const appContainer = document.getElementById('app')!;
-const logBox: HTMLTextAreaElement = document.getElementById('log')! as HTMLTextAreaElement;
+const logBox: HTMLDivElement = document.getElementById('log')! as HTMLDivElement;
 
-const ipcr = (window as any).ipcRender;
+const renderer = (window as any).ipcRender;
 
 document.getElementById('run-test')
     ?.addEventListener('click', () => {
         const eventName = 'runE2eTestLog'
-        ipcr.receive(eventName, (data: any) => {
-            logBox.value += data + '\n'
+        renderer.receive(eventName, (data: any) => {
+            logBox.innerHTML += data + '<br/>'
         })
-        ipcr.send('runE2eTest', {eventName});
+        renderer.send('runE2eTest', {eventName});
     });

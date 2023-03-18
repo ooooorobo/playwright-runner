@@ -21,5 +21,8 @@
     "cross-env": "^7.0.3",
     "electron": "^23.1.4",
     "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "ansi_up": "^5.1.0"
   }
 }
