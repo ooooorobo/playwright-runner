@@ -1,24 +1,31 @@
 import Koa from 'koa';
+import Router from "koa-router";
 
 import {createReadStream} from 'fs';
 import path from 'path';
 import serve from "koa-static";
 
 import startSocket from "./socket";
-import {spawn} from "child_process";
+import {tests} from "./analyzer";
 
 const app = new Koa();
 app.use(serve(__dirname + '/public'))
-app.use(async (ctx) => {
+
+const router = new Router();
+
+router.get('/', async (ctx) => {
     ctx.type = 'html';
     ctx.body = createReadStream(path.join(__dirname, './index.html'))
-
-    console.log('hi')
-    const script = spawn('yarn run e2e:start')
-    script.stdout.on('data', (data) => {
-        console.log(data)
-    })
 })
 
+router.get('/tests', async (ctx) => {
+    ctx.body = tests;
+});
+
+app.use(router.routes());
+app.use(router.allowedMethods());
+
 const httpServer = startSocket(app.callback());
-httpServer.listen(3000);
+httpServer.listen(3000, () => {
+    console.log('server is listening to port 3000')
+});

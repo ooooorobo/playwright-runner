@@ -10,10 +10,9 @@ const startSocket = (listener: any) => {
     const io = new Server(httpServer, {})
 
     io.on('connection', (socket) => {
-        socket.on('run test', () => {
-            const script = spawn('yarn', ['e2e:start'])
+        socket.on('run test', (testName = '') => {
+            const script = spawn('yarn', ['exec', 'playwright', 'test', '-g', testName]) //'e2e:start'
             script.stdout.on('data', (data) => {
-                console.log(data.toString())
                 socket.emit('test log', convert.toHtml(data.toString()));
             })
         })
