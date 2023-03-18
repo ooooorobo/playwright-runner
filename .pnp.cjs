@@ -29,6 +29,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@playwright/test", "npm:1.31.2"],\
+            ["@types/node", "npm:18.15.3"],\
             ["ansi_up", "npm:5.1.0"],\
             ["copyfiles", "npm:2.4.1"],\
             ["cross-env", "npm:7.0.3"],\
@@ -1473,6 +1474,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["playwright-poc", "workspace:."],\
             ["@playwright/test", "npm:1.31.2"],\
+            ["@types/node", "npm:18.15.3"],\
             ["ansi_up", "npm:5.1.0"],\
             ["copyfiles", "npm:2.4.1"],\
             ["cross-env", "npm:7.0.3"],\
