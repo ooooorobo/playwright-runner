@@ -3,28 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/src/main.js",
-  "scripts": {
-    "clean": "rm -rf dist",
-    "compile": "yarn clean && tsc && copyfiles -f src/index.html dist",
-    "start": "yarn compile && cross-env NODE_ENV=development electron .",
-    "test-e2e": "playwright test example.spec.ts",
-    "test-e2e-open": "playwright test --headed",
-    "test-e2e-debug": "playwright test --debug",
-    "test-e2e-codegen": "playwright codegen"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.31.2",
     "@types/node": "^18.15.3",
-    "copyfiles": "^2.4.1",
-    "cross-env": "^7.0.3",
-    "electron": "^23.1.4",
     "typescript": "^5.0.2"
   },
-  "dependencies": {
-    "ansi_up": "^5.1.0"
-  },
-  "packageManager": "yarn@3.5.0"
+  "packageManager": "yarn@3.5.0",
+  "workspaces": [
+    "packages/e2e",
+    "packages/electron"
+  ]
 }

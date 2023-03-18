@@ -1,0 +1,18 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "main": "dist/src/main.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "compile": "yarn clean && tsc && copyfiles -f packages/electron/src/index.html dist",
+    "start": "yarn compile && cross-env NODE_ENV=development electron ."
+  },
+  "dependencies": {
+    "ansi_up": "^5.1.0"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
+    "electron": "^23.1.4"
+  }
+}

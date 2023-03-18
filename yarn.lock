@@ -495,6 +495,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"e2e@workspace:packages/e2e":
+  version: 0.0.0-use.local
+  resolution: "e2e@workspace:packages/e2e"
+  dependencies:
+    "@playwright/test": ^1.31.2
+  languageName: unknown
+  linkType: soft
+
 "electron@npm:^23.1.4":
   version: 23.1.4
   resolution: "electron@npm:23.1.4"
@@ -507,6 +515,17 @@ __metadata:
   checksum: 42e167d5ae4e60b9a2bab191321645cb76b901d3c88dc7ae1551ecad2946aa4ebef9e49c347ca3db76032d84802d878a64a1123111579a270e3b8406c5a18b16
   languageName: node
   linkType: hard
+
+"electron@workspace:packages/electron":
+  version: 0.0.0-use.local
+  resolution: "electron@workspace:packages/electron"
+  dependencies:
+    ansi_up: ^5.1.0
+    copyfiles: ^2.4.1
+    cross-env: ^7.0.3
+    electron: ^23.1.4
+  languageName: unknown
+  linkType: soft
 
 "emoji-regex@npm:^8.0.0":
   version: 8.0.0
@@ -1290,12 +1309,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "playwright-poc@workspace:."
   dependencies:
-    "@playwright/test": ^1.31.2
     "@types/node": ^18.15.3
-    ansi_up: ^5.1.0
-    copyfiles: ^2.4.1
-    cross-env: ^7.0.3
-    electron: ^23.1.4
     typescript: ^5.0.2
   languageName: unknown
   linkType: soft

@@ -1,0 +1,13 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "scripts": {
+    "test-e2e": "playwright test example.spec.ts",
+    "test-e2e-open": "playwright test --headed",
+    "test-e2e-debug": "playwright test --debug",
+    "test-e2e-codegen": "playwright codegen"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.31.2"
+  }
+}

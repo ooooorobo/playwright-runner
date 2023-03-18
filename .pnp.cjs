@@ -14,11 +14,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "playwright-poc",\
         "reference": "workspace:."\
+      },\
+      {\
+        "name": "e2e",\
+        "reference": "workspace:packages/e2e"\
+      },\
+      {\
+        "name": "electron",\
+        "reference": "workspace:packages/electron"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
+      ["e2e", ["workspace:packages/e2e"]],\
+      ["electron", ["workspace:packages/electron"]],\
       ["playwright-poc", ["workspace:."]]\
     ],\
     "fallbackPool": [\
@@ -28,12 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@playwright/test", "npm:1.31.2"],\
             ["@types/node", "npm:18.15.3"],\
-            ["ansi_up", "npm:5.1.0"],\
-            ["copyfiles", "npm:2.4.1"],\
-            ["cross-env", "npm:7.0.3"],\
-            ["electron", "npm:23.1.4"],\
             ["typescript", "patch:typescript@npm%3A5.0.2#~builtin<compat/typescript>::version=5.0.2&hash=85af82"]\
           ],\
           "linkType": "SOFT"\
@@ -596,6 +601,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["e2e", [\
+        ["workspace:packages/e2e", {\
+          "packageLocation": "./packages/e2e/",\
+          "packageDependencies": [\
+            ["e2e", "workspace:packages/e2e"],\
+            ["@playwright/test", "npm:1.31.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["electron", [\
         ["npm:23.1.4", {\
           "packageLocation": "./.yarn/unplugged/electron-npm-23.1.4-05a1955c02/node_modules/electron/",\
@@ -606,6 +621,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["extract-zip", "npm:2.0.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["workspace:packages/electron", {\
+          "packageLocation": "./packages/electron/",\
+          "packageDependencies": [\
+            ["ansi_up", "npm:5.1.0"],\
+            ["copyfiles", "npm:2.4.1"],\
+            ["cross-env", "npm:7.0.3"],\
+            ["electron", "npm:23.1.4"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["emoji-regex", [\
@@ -1473,12 +1498,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["playwright-poc", "workspace:."],\
-            ["@playwright/test", "npm:1.31.2"],\
             ["@types/node", "npm:18.15.3"],\
-            ["ansi_up", "npm:5.1.0"],\
-            ["copyfiles", "npm:2.4.1"],\
-            ["cross-env", "npm:7.0.3"],\
-            ["electron", "npm:23.1.4"],\
             ["typescript", "patch:typescript@npm%3A5.0.2#~builtin<compat/typescript>::version=5.0.2&hash=85af82"]\
           ],\
           "linkType": "SOFT"\
