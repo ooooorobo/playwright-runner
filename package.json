@@ -2,8 +2,11 @@
   "name": "playwright-poc",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/src/main.js",
   "scripts": {
+    "clean": "rm -rf dist",
+    "compile": "npm run clean && tsc && copyfiles -f src/index.html dist",
+    "start": "npm run compile && cross-env NODE_ENV=development electron .",
     "test-e2e": "playwright test",
     "test-e2e-open": "playwright test --headed",
     "test-e2e-debug": "playwright test --debug",
@@ -14,6 +17,9 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.31.2",
+    "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
+    "electron": "^23.1.4",
     "typescript": "^5.0.2"
   }
 }
