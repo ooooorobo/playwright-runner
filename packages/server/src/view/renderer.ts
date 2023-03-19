@@ -47,6 +47,10 @@ formAuth.addEventListener('submit', async (e) => {
     const formData = new FormData(e.target as HTMLFormElement);
     const formProps = Object.fromEntries(formData);
     const res = await fetch(BASE_URL + '/set-auth', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             method: 'post',
             body: JSON.stringify({
                 username: formProps.username,
