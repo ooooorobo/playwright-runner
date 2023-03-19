@@ -3,6 +3,8 @@ const socket = io();
 
 const BASE_URL = 'http://localhost:3000'
 
+let isTesting = false;
+
 const logBox = document.getElementById('log-box')! as HTMLDivElement;
 const button = document.getElementById('btn-run-test')! as HTMLButtonElement;
 const selectTestName = document.getElementById('select-test-name')! as HTMLSelectElement;
@@ -14,6 +16,13 @@ const btnRefreshTests = document.getElementById('btn-refresh-tests')! as HTMLBut
 const btnCodegen = document.getElementById('btn-codegen')! as HTMLButtonElement;
 const btnClearLog = document.getElementById('btn-clear-log')! as HTMLButtonElement;
 const inputCodegenUrl = document.getElementById('input-codegen-url')! as HTMLInputElement;
+
+const addLog = (msg: string, goToBottom = false) => {
+    logBox.innerHTML += msg
+        .replace(/\n/g, '<br/>')
+        .replace(' ', '&nbsp;');
+    if (goToBottom) logBox.scrollIntoView({block: "end"});
+}
 
 const createOption = (value: string) => {
     const option = document.createElement('option')
@@ -49,10 +58,15 @@ formAuth.addEventListener('submit', async (e) => {
 });
 
 button.addEventListener('click', () => {
+    if (isTesting) return alert('테스트가 진행중입니다')
+    else isTesting = true;
+
+
     const testName = selectTestName.value;
     const openBrowser = optionOpenBrowser.checked;
     const useDebug = optionDebug.checked;
     const showReport = optionReport.checked;
+    addLog(`\n=========테스트 시작: ${new Date().toLocaleString('kr')} / [${testName}]=========\n\n`)
     socket.emit('run test', testName, {openBrowser, useDebug, showReport});
 })
 
@@ -75,10 +89,12 @@ btnCodegen.addEventListener('click', () => {
 })
 
 socket.on('test log', (msg: string) => {
-    logBox.innerHTML += msg
-        .replace(/\n/g, '<br/>')
-        .replace(' ', '&nbsp;');
-    logBox.scrollIntoView({block: "end"});
+    addLog(msg)
+})
+
+socket.on('test log ended', () => {
+    isTesting = false;
+    addLog('\n=========테스트 종료됨=========\n\n')
 })
 
 socket.on('set auth done', () => alert('done'));

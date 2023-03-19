@@ -23,11 +23,12 @@ const startSocket = (listener: any) => {
             script.stderr.on('data', (data) => {
                 socket.emit('test log', convert.toHtml(data.toString()));
             })
-            if (showReport) {
-                script.on('close', () => {
+            script.on('close', () => {
+                socket.emit('test log ended');
+                if (showReport) {
                     spawn('yarn', ['exec', 'playwright', 'show-report']);
-                })
-            }
+                }
+            })
         })
     })
 
