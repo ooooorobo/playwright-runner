@@ -1,15 +1,18 @@
 import Koa from 'koa';
 import Router from "koa-router";
-
-import {createReadStream} from 'fs';
-import path from 'path';
 import serve from "koa-static";
+import bodyParser from 'koa-bodyparser';
+
+import {spawn} from "child_process";
+import {createReadStream, createWriteStream} from 'fs';
+import path from 'path';
 
 import startSocket from "./socket";
 import {analyzeTestFiles, getTestNames} from "./analyzer";
 
 const app = new Koa();
 app.use(serve(__dirname + '/public'))
+app.use(bodyParser());
 
 const router = new Router();
 
@@ -24,6 +27,25 @@ router.get('/tests', async (ctx) => {
 
 router.get('/start-analyze', async (ctx) => {
     ctx.body = await analyzeTestFiles();
+})
+
+router.get('/codegen', async (ctx) => {
+    const url = ctx.request.query.url as string;
+    spawn('yarn', ['exec', 'playwright', 'codegen', url || '']);
+    ctx.body = true;
+})
+
+router.post('/set-auth', async (ctx) => {
+    const {username, password} = ctx.request.body as { username: string, password: string };
+
+    await spawn('mkdir', ['-p', process.cwd() + 'playwright/.auth']);
+    await spawn('touch', [process.cwd() + 'playwright/.auth/user.json']);
+    await spawn('touch', [process.cwd() + '.env']);
+    const stream = createWriteStream(path.join(process.cwd(), '.env')) // 흠.......
+    stream.write(`USERNAME: ${username}\nPASSWORD: ${password}`);
+    stream.end();
+
+    ctx.body = true;
 })
 
 app.use(router.routes());
