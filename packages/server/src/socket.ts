@@ -10,20 +10,24 @@ const startSocket = (listener: any) => {
     const io = new Server(httpServer, {})
 
     io.on('connection', (socket) => {
-        socket.on('run test', (testName = 'all', open = false, debug = false) => {
+        socket.on('run test', (testName = 'all', {openBrowser = false, useDebug = false, showReport = false}) => {
             const script = spawn('yarn', [
                 'exec', 'playwright', 'test',
                 testName === 'all' ? '' : `-g ${testName}`,
-                open ? '--headed' : '',
-                debug ? '--debug' : '',
+                openBrowser ? '--headed' : '',
+                useDebug ? '--debug' : '',
             ])
             script.stdout.on('data', (data) => {
                 socket.emit('test log', convert.toHtml(data.toString()));
             })
-        })
-
-        socket.on('set auth', async (username, password) => {
-
+            script.stderr.on('data', (data) => {
+                socket.emit('test log', convert.toHtml(data.toString()));
+            })
+            if (showReport) {
+                script.on('close', () => {
+                    spawn('yarn', ['exec', 'playwright', 'show-report']);
+                })
+            }
         })
     })
 

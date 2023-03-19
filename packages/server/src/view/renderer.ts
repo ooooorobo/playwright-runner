@@ -8,6 +8,7 @@ const button = document.getElementById('btn-run-test')! as HTMLButtonElement;
 const selectTestName = document.getElementById('select-test-name')! as HTMLSelectElement;
 const optionOpenBrowser = document.getElementById('option-open-browser')! as HTMLInputElement;
 const optionDebug = document.getElementById('option-debug')! as HTMLInputElement;
+const optionReport = document.getElementById('option-report')! as HTMLInputElement;
 const formAuth = document.getElementById('auth')! as HTMLFormElement;
 const btnRefreshTests = document.getElementById('btn-refresh-tests')! as HTMLButtonElement;
 const btnCodegen = document.getElementById('btn-codegen')! as HTMLButtonElement;
@@ -50,7 +51,8 @@ button.addEventListener('click', () => {
     const testName = selectTestName.value;
     const openBrowser = optionOpenBrowser.checked;
     const useDebug = optionDebug.checked;
-    socket.emit('run test', testName, openBrowser, useDebug);
+    const showReport = optionReport.checked;
+    socket.emit('run test', testName, {openBrowser, useDebug, showReport});
 })
 
 btnRefreshTests.addEventListener('click', async () => {
