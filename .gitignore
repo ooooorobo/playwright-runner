@@ -4,6 +4,7 @@ dist/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+/playwright/.auth
 
 ### yarn ###
 .yarn/*
@@ -13,3 +14,5 @@ dist/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+.env

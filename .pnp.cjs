@@ -39,6 +39,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ansi-to-html", "npm:0.7.2"],\
             ["babel-loader", "virtual:3b7e7e05e86055a113e4cf5a4f5294bcd6345ac7228a27ac3c497d6c73ead1ec76ef0590f4b957b3b63b3c2aaa9cebae4903ed0e6281bc1171be777f31f3f4ba#npm:9.1.2"],\
             ["bufferutil", "npm:4.0.7"],\
+            ["dotenv", "npm:16.0.3"],\
             ["html-webpack-plugin", "virtual:3b7e7e05e86055a113e4cf5a4f5294bcd6345ac7228a27ac3c497d6c73ead1ec76ef0590f4b957b3b63b3c2aaa9cebae4903ed0e6281bc1171be777f31f3f4ba#npm:5.5.0"],\
             ["koa", "npm:2.14.1"],\
             ["koa-router", "npm:12.0.0"],\
@@ -2138,6 +2139,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dot-case", "npm:3.0.4"],\
             ["no-case", "npm:3.0.4"],\
             ["tslib", "npm:2.5.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dotenv", [\
+        ["npm:16.0.3", {\
+          "packageLocation": "./.yarn/cache/dotenv-npm-16.0.3-4cc29121dc-afcf03f373.zip/node_modules/dotenv/",\
+          "packageDependencies": [\
+            ["dotenv", "npm:16.0.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4256,6 +4266,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ansi-to-html", "npm:0.7.2"],\
             ["babel-loader", "virtual:3b7e7e05e86055a113e4cf5a4f5294bcd6345ac7228a27ac3c497d6c73ead1ec76ef0590f4b957b3b63b3c2aaa9cebae4903ed0e6281bc1171be777f31f3f4ba#npm:9.1.2"],\
             ["bufferutil", "npm:4.0.7"],\
+            ["dotenv", "npm:16.0.3"],\
             ["html-webpack-plugin", "virtual:3b7e7e05e86055a113e4cf5a4f5294bcd6345ac7228a27ac3c497d6c73ead1ec76ef0590f4b957b3b63b3c2aaa9cebae4903ed0e6281bc1171be777f31f3f4ba#npm:5.5.0"],\
             ["koa", "npm:2.14.1"],\
             ["koa-router", "npm:12.0.0"],\

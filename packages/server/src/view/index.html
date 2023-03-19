@@ -5,9 +5,19 @@
     <title>Playwright runner</title>
 </head>
 <body>
-<h1>hi!</h1>
+<div>
+    <form id="auth">
+        <label for="username">아이디</label>
+        <input id="username" name="username"/>
+        <label for="password">비밀번호</label>
+        <input id="password" type="password" name="password"/>
+        <button type="submit">설정</button>
+    </form>
+</div>
 <select id="select-test-name"></select>
-<button id="btn-run-test">click this!</button>
+<button id="btn-run-test">run test</button>
+<label for="option-open-browser">브라우저 열기</label>
+<input id="option-open-browser" type="checkbox"/>
 <div id="log-box" style="font-family: monospace;background-color: lightgray;white-space: pre-wrap;"></div>
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ansi-to-html/0.7.2/ansi_to_html.js"></script>

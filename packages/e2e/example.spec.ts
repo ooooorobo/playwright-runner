@@ -14,5 +14,5 @@ test('get started link', async ({page}) => {
     await page.getByRole('link', {name: 'Get started'}).click();
 
     // Expects the URL to contain intro.
-    await expect(page).toHaveURL(/.*in3tro/);
+    await expect(page).toHaveURL(/.*intro/);
 });
