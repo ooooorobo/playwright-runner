@@ -17,7 +17,7 @@ const btnCodegen = document.getElementById('btn-codegen')! as HTMLButtonElement;
 const btnClearLog = document.getElementById('btn-clear-log')! as HTMLButtonElement;
 const inputCodegenUrl = document.getElementById('input-codegen-url')! as HTMLInputElement;
 
-const addLog = (msg: string, goToBottom = false) => {
+const addLog = (msg: string, goToBottom = true) => {
     logBox.innerHTML += msg
         .replace(/\n/g, '<br/>')
         .replace(' ', '&nbsp;');
