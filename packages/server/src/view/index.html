@@ -3,32 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <title>Playwright runner</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        section {
+            margin-bottom: 20px;
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        section h2 {
+            margin-top: 0;
+            font-size: 16px;
+        }
+
+        section#section-log {
+            padding: 0;
+            flex-grow: 1;
+            height: 100%;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        section#section-log .section-log-header {
+            position: sticky;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 15px 5px;
+            background-color: #f4f4f4;
+        }
+
+        #btn-clear-log {
+            position: absolute;
+            right: 30px;
+            top: 15px;
+        }
+
+        label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        label span {
+            width: 100px;
+            min-width: max-content;
+            margin-right: 10px;
+        }
+
+        #log-box {
+            padding: 15px;
+            margin-top: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <form id="auth">
-        <label for="username">아이디</label>
-        <input id="username" name="username"/>
-        <label for="password">비밀번호</label>
-        <input id="password" type="password" name="password"/>
-        <button type="submit">설정</button>
-    </form>
+<div id="container">
+    <div style="display: flex; column-gap: 20px">
+        <section>
+            <h2>테스트 계정 설정</h2>
+            <form id="auth">
+                <label>
+                    <span>아이디</span>
+                    <input id="username" name="username"/>
+                </label>
+                <label>
+                    <span>비밀번호</span>
+                    <input id="password" type="password" name="password"/>
+                </label>
+                <button type="submit">설정</button>
+            </form>
+        </section>
+        <section>
+            <h2>테스트 코드 생성</h2>
+            <label>
+                <span>코드 생성 시작할 url 입력</span>
+                <input id="input-codegen-url" placeholder="url 입력"/>
+            </label>
+            <button id="btn-codegen">테스트 코드 생성하기</button>
+        </section>
+    </div>
+    <section>
+        <h2>테스트 실행</h2>
+        <div>
+            <select id="select-test-name"></select>
+            <button id="btn-run-test" type="button" class="xt-button">run test</button>
+        </div>
+        <button id="btn-refresh-tests">테스트 목록 갱신</button>
+        <div>
+            <label>
+                <input id="option-open-browser" type="checkbox"/>
+                <span>브라우저 열기</span>
+            </label>
+            <label>
+                <input id="option-debug" type="checkbox"/>
+                <span>디버그</span>
+            </label>
+            <label>
+                <input id="option-report" type="checkbox"/>
+                <span>테스트 종료 후 결과 페이지 보기</span>
+            </label>
+        </div>
+    </section>
+    <section id="section-log">
+        <div class="section-log-header">
+            <h2>로그</h2>
+            <button id="btn-clear-log">비우기</button>
+        </div>
+        <div id="log-box"></div>
+    </section>
 </div>
-<select id="select-test-name"></select>
-<button id="btn-run-test">run test</button>
-<label for="option-open-browser">브라우저 열기</label>
-<input id="option-open-browser" type="checkbox"/>
-<label for="option-debug">디버그</label>
-<input id="option-debug" type="checkbox"/>
-<label for="option-report">테스트 종료 후 결과 페이지 보기</label>
-<input id="option-report" type="checkbox"/>
-<button id="btn-refresh-tests">테스트 목록 새로고침</button>
-<label for="input-codegen-url">코드 생성 시작할 url 입력</label>
-<input id="input-codegen-url" placeholder="url 입력"/>
-<button id="btn-codegen">테스트 코드 생성하기</button>
-<div id="log-box" style="font-family: monospace;background-color: lightgray;white-space: pre-wrap;"></div>
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ansi-to-html/0.7.2/ansi_to_html.js"></script>
 <script src="renderer.js"></script>
 </body>
 </html>

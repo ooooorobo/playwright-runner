@@ -12,6 +12,7 @@ const optionReport = document.getElementById('option-report')! as HTMLInputEleme
 const formAuth = document.getElementById('auth')! as HTMLFormElement;
 const btnRefreshTests = document.getElementById('btn-refresh-tests')! as HTMLButtonElement;
 const btnCodegen = document.getElementById('btn-codegen')! as HTMLButtonElement;
+const btnClearLog = document.getElementById('btn-clear-log')! as HTMLButtonElement;
 const inputCodegenUrl = document.getElementById('input-codegen-url')! as HTMLInputElement;
 
 const createOption = (value: string) => {
@@ -25,7 +26,7 @@ const getTests = async () => fetch(BASE_URL + '/tests')
     .then(data => data.json())
     .then((names: string[]) => {
         selectTestName.innerHTML = '';
-        ['모두 실행', ...names].forEach((name) => {
+        ['all', ...names].forEach((name) => {
             selectTestName.appendChild(
                 createOption(name)
             );
@@ -64,6 +65,10 @@ btnRefreshTests.addEventListener('click', async () => {
     }
 })
 
+btnClearLog.addEventListener('click', () => {
+    logBox.innerText = '';
+})
+
 btnCodegen.addEventListener('click', () => {
     const url = inputCodegenUrl.value;
     fetch(BASE_URL + `/codegen?url=${url}`);
@@ -73,6 +78,7 @@ socket.on('test log', (msg: string) => {
     logBox.innerHTML += msg
         .replace(/\n/g, '<br/>')
         .replace(' ', '&nbsp;');
+    logBox.scrollIntoView({block: "end"});
 })
 
 socket.on('set auth done', () => alert('done'));
