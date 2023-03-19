@@ -5,6 +5,7 @@ dist/
 /playwright-report/
 /playwright/.cache/
 /playwright/.auth
+/packages/server/data
 
 ### yarn ###
 .yarn/*

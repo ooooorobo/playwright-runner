@@ -3565,9 +3565,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright-poc@workspace:.":
+"playwright-runner@workspace:.":
   version: 0.0.0-use.local
-  resolution: "playwright-poc@workspace:."
+  resolution: "playwright-runner@workspace:."
   dependencies:
     "@babel/cli": ^7.21.0
     "@babel/core": ^7.21.3

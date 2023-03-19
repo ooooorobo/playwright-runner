@@ -6,6 +6,7 @@ const button = document.getElementById('btn-run-test')! as HTMLButtonElement;
 const selectTestName = document.getElementById('select-test-name')! as HTMLSelectElement;
 const optionOpenBrowser = document.getElementById('option-open-browser')! as HTMLInputElement;
 const formAuth = document.getElementById('auth')! as HTMLFormElement;
+const btnRefreshTests = document.getElementById('btn-refresh-tests')! as HTMLButtonElement;
 
 const createOption = (value: string) => {
     const option = document.createElement('option')
@@ -14,7 +15,7 @@ const createOption = (value: string) => {
     return option;
 }
 
-fetch('http://localhost:3000/tests')
+const getTests = async () => fetch('http://localhost:3000/tests')
     .then(data => data.json())
     .then((names: string[]) => {
         selectTestName.innerHTML = '';
@@ -32,11 +33,19 @@ formAuth.addEventListener('submit', (e) => {
     socket.emit('set auth', formProps.username, formProps.password);
 });
 
-
 button.addEventListener('click', () => {
     const testName = selectTestName.value;
     const openBrowser = optionOpenBrowser.checked;
     socket.emit('run test', testName, openBrowser);
+})
+
+btnRefreshTests.addEventListener('click', async () => {
+    const response = await fetch('http://localhost:3000/start-analyze')
+    const result = await response.json()
+    if (result) {
+        await getTests();
+        alert('갱신 완료')
+    }
 })
 
 socket.on('test log', (msg: string) => {
@@ -47,3 +56,5 @@ socket.on('test log', (msg: string) => {
 })
 
 socket.on('set auth done', () => alert('done'));
+
+void getTests();

@@ -6,7 +6,7 @@ import path from 'path';
 import serve from "koa-static";
 
 import startSocket from "./socket";
-import {tests} from "./analyzer";
+import {analyzeTestFiles, getTestNames} from "./analyzer";
 
 const app = new Koa();
 app.use(serve(__dirname + '/public'))
@@ -19,8 +19,12 @@ router.get('/', async (ctx) => {
 })
 
 router.get('/tests', async (ctx) => {
-    ctx.body = tests;
+    ctx.body = getTestNames();
 });
+
+router.get('/start-analyze', async (ctx) => {
+    ctx.body = await analyzeTestFiles();
+})
 
 app.use(router.routes());
 app.use(router.allowedMethods());
